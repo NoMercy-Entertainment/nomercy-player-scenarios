@@ -1,8 +1,8 @@
 {
   "name": "@nomercy-entertainment/player-scenarios",
-  "private": true,
   "type": "module",
   "version": "2.0.0",
+  "private": true,
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
@@ -11,9 +11,9 @@
     "lint:fix": "eslint . --fix --max-warnings 0"
   },
   "dependencies": {
+    "@nomercy-entertainment/nomercy-music-player": "file:../../packages/nomercy-music-player",
     "@nomercy-entertainment/nomercy-player-core": "file:../../packages/nomercy-player-core",
     "@nomercy-entertainment/nomercy-video-player": "file:../../packages/nomercy-video-player",
-    "@nomercy-entertainment/nomercy-music-player": "file:../../packages/nomercy-music-player",
     "ajv": "^8.17.0"
   },
   "devDependencies": {
