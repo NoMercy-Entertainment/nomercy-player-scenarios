@@ -129,12 +129,36 @@ unrelated reason.
 Do the same natively. Without it, a runner that silently observes nothing looks
 identical to a player that conforms perfectly.
 
+## Probing beats guessing
+
+Every expectation in the set was read off a running player, not written from a
+plan. That is not fastidiousness — four of the first drafts were wrong, and each
+wrong one would have become a native runner chasing behaviour that does not
+exist:
+
+- A backend `error` surfaces as nothing at the consumer; `stream:error` is the
+  backend's own name and does not reach the player either on this path.
+- A backend `seeked` does not produce `seeked`.
+- `beforeLoad` is not on the play path, so refusing it produces no
+  `loadPrevented`.
+- `queue()` does not run through the mutation guard, so refusing
+  `beforeMutation` produces no `mutationPrevented`.
+
+Write the scenario, run it, read what came out, then write the expectation.
+
 ## What is not here yet
 
-The scenario set covers transport, the prevented path for six actions, the queue
-cursor, the mode changes, and four backend-originated events. It does not yet
-cover setup staging, plugin lifecycle, subtitles, quality switching or cast.
-Those need scenarios written against behaviour the native side has not built
-yet; adding them before the behaviour exists would mean writing expectations
-from the plans rather than from the running players, which is how a suite ends
+Twenty-two scenarios covering transport, the prevented path for six actions, the
+queue cursor, the mode changes, the phase and media-ready lifecycle, and four
+backend-originated events.
+
+Against the 144 contract events the web test suites already exercise, that is a
+start rather than coverage. The largest untouched areas are subtitles and cues,
+chapters, quality and audio-track switching, cast, the plugin lifecycle events,
+and the setup staging sequence. Most of those need an action vocabulary this
+runner does not have yet — registering a plugin, loading a track list — rather
+than more scenarios in the existing one.
+
+Nothing here asserts on behaviour the native side has not built. Writing
+expectations from the plans rather than from running players is how a suite ends
 up asserting what someone hoped would happen.
