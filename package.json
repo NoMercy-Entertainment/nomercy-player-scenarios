@@ -8,7 +8,8 @@
     "test": "vitest run",
     "check": "vitest run",
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint . --fix --max-warnings 0"
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "sync:contract": "node scripts/sync-contract.mjs"
   },
   "dependencies": {
     "@nomercy-entertainment/nomercy-music-player": "file:../../packages/nomercy-music-player",

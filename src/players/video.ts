@@ -29,6 +29,12 @@ let mountCounter = 0;
 export async function buildVideoPlayer(opts: {
   playlist?: VideoPlaylistItem[];
   config?: VideoPlayerConfig<VideoPlaylistItem>;
+  /**
+   * Substitute backend. Exists so the drift proof can hand in one that
+   * deliberately misbehaves: a conformance runner nobody has watched fail is
+   * a runner nobody knows works.
+   */
+  backend?: ScenarioBackend;
 }): Promise<{
   player: NMVideoPlayer<VideoPlaylistItem> & { readonly __scenarioBackend: ScenarioBackend };
   dispose: () => Promise<void>;
@@ -38,7 +44,7 @@ export async function buildVideoPlayer(opts: {
   container.id = id;
   document.body.appendChild(container);
 
-  const backend = new ScenarioBackend();
+  const backend = opts.backend ?? new ScenarioBackend();
   const player = Object.assign(new NMVideoPlayer<VideoPlaylistItem>(id), { __scenarioBackend: backend });
 
   player.setup({

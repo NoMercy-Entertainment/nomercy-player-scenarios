@@ -33,7 +33,11 @@
         "preventVia": { "type": "string" },
         "backend": { "type": "string" }
       },
-      "oneOf": [{ "required": ["method"] }, { "required": ["backend"] }]
+      "oneOf": [
+        { "required": ["method"] },
+        { "required": ["backend"] },
+        { "required": ["preventVia"] }
+      ]
     }
   }
 }
