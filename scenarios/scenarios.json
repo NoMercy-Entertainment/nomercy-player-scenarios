@@ -591,6 +591,78 @@
       "expect": [
         "queue"
       ]
+    },
+    {
+      "id": "queue/auto-advance-on-ended",
+      "name": "the item ending advances the queue and starts the next one",
+      "medium": "video",
+      "playlist": [
+        {
+          "id": "a",
+          "title": "A",
+          "url": "https://example.test/a"
+        },
+        {
+          "id": "b",
+          "title": "B",
+          "url": "https://example.test/b"
+        }
+      ],
+      "actions": [
+        {
+          "method": "play"
+        },
+        {
+          "backend": "ended"
+        }
+      ],
+      "expect": [
+        "play",
+        "ended",
+        "next",
+        "item",
+        "play"
+      ]
+    },
+    {
+      "id": "chapters/next-chapter",
+      "name": "next chapter moves the position to the next chapter start",
+      "medium": "video",
+      "playlist": [
+        {
+          "id": "a",
+          "title": "A",
+          "url": "https://example.test/a",
+          "chapters": [
+            {
+              "index": 0,
+              "start": 0,
+              "end": 30,
+              "title": "Intro"
+            },
+            {
+              "index": 1,
+              "start": 30,
+              "end": 90,
+              "title": "Main"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "method": "play"
+        },
+        {
+          "method": "nextChapter"
+        }
+      ],
+      "expect": [
+        "play",
+        "beforeSeek",
+        "seek",
+        "seeked"
+      ]
     }
   ]
 }
